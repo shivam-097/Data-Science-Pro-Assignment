@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Data Update</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
+</head>
+<body>
+
+<h1>Real-Time Data Update</h1>
+<div id="data-container">
+    <p>Data value: <span id="data-value">{{ data.value }}</span></p>
+    <button onclick="updateData()">Update Data</button>
+</div>
+
+<script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    socket.on('update_data', function(data) {
+        document.getElementById('data-value').innerText = data.value;
+    });
+
+    function updateData() {
+        // Generate a random number as the new data value
+        var newDataValue = Math.floor(Math.random() * 100);
+        // Send the new data to the server
+        socket.emit('update_data', { value: newDataValue });
+    }
+</script>
+
+</body>
+</html>

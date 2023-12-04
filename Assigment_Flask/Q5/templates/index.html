@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome Page</title>
+    </head>
+    <body style="text-align: center;">
+        <h1>Enter your Name</h1>
+        <br>
+
+        <form action="/submit" method="post">
+            <h3>Enter your Name : </h3>
+            <input type="text" name="name" required >
+            <input type="submit" value="Submit">
+        </form>
+
+        {% if name%}
+            <h2>Your Name is {{name}}</h2>
+        
+        {% endif %}
+    </body>
+</html>
